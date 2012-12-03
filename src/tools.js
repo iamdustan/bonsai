@@ -339,6 +339,26 @@ define([], function() {
       array.length -= numRemoved;
 
       return array;
+    },
+
+    /**
+     * Get degrees value from a radian.
+     *
+     * @param {Number} rad radians
+     * @returns {String} degrees
+     */
+    degFromRad: function (rad) {
+      return (rad * Math.PI / 180) + 'deg';
+    },
+
+    /**
+     * Calculates the radians of a degree string
+     *
+     * @param {String|Number} deg degrees
+     * @returns {Number} radians
+     */
+    radFromDeg: function (deg) {
+      return parseFloat(deg) * 180 / Math.PI;
     }
   };
 
