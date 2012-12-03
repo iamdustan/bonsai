@@ -345,10 +345,16 @@ define([], function() {
      * Get degrees value from a radian.
      *
      * @param {Number} rad radians
+     * @param {Number} [precision] Floating point precision
      * @returns {String} degrees
      */
-    degFromRad: function (rad) {
-      return (rad * Math.PI / 180) + 'deg';
+    degFromRad: function (rad, precision) {
+      var degrees = rad * 180 / Math.PI;
+      if (precision) {
+        degrees.toFixed(precision);
+      }
+
+      return degrees + 'deg';
     },
 
     /**
@@ -358,8 +364,9 @@ define([], function() {
      * @returns {Number} radians
      */
     radFromDeg: function (deg) {
-      return parseFloat(deg) * 180 / Math.PI;
+      return parseFloat(deg) * Math.PI / 180;
     }
+
   };
 
   return tools;
