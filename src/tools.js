@@ -6,7 +6,8 @@ define([], function() {
       noop = function() {},
       push = [].push,
       slice = [].slice,
-      toString = {}.toString;
+      toString = {}.toString,
+      PI = Math.PI;
 
   /**
    *
@@ -349,9 +350,9 @@ define([], function() {
      * @returns {String} degrees
      */
     degFromRad: function (rad, precision) {
-      var degrees = rad * 180 / Math.PI;
-      if (precision) {
-        degrees.toFixed(precision);
+      var degrees = rad * 180 / PI;
+      if (typeof precision === 'number') {
+        degrees = degrees.toFixed(precision);
       }
 
       return degrees + 'deg';
@@ -364,7 +365,7 @@ define([], function() {
      * @returns {Number} radians
      */
     radFromDeg: function (deg) {
-      return parseFloat(deg) * Math.PI / 180;
+      return parseFloat(deg) * PI / 180;
     }
 
   };

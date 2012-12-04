@@ -306,6 +306,7 @@ define([
 
       expect( radFromDeg(degrees + 'deg') ).toBeCloseTo(expected, 10);
     });
+
   });
 
   describe('degFromRad', function () {
@@ -320,6 +321,14 @@ define([
       var expected = toDegrees(radians) + 'deg';
 
       expect(degFromRad(radians)).toBe(expected);
+    });
+
+    it('converts radians to ndegrees with a precision of 0', function () {
+      var radians = 0.785398163; // 45 degrees
+      var expected = toDegrees(radians).toFixed(0) + 'deg';
+      console.log('expected', expected);
+
+      expect(degFromRad(radians, 0)).toBe(expected);
     });
 
   });
