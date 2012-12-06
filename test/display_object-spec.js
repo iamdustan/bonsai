@@ -228,6 +228,32 @@ define([
           expect(m[p]).toBeCloseTo(m2[p], 10);
         });
       });
+
+      function rad(deg) { return deg * Math.PI / 180; }
+
+      it('should ...what in the world?', function () {
+        var d = new DisplayObject().attr('scaleX', 2).attr('scaleY', 3).attr('rotation', rad(45));
+        var attrs = d.attr();
+
+        // create scaled matrix, then rotate
+        var m = new Matrix(2, 0, 0, 3, 0, 0).rotate(rad(45));
+        // a matrix made in the same order as above appears to be made in
+        var m2 = new Matrix().scale(2, 3).rotate(rad(45));
+        // a matrix made through the createBox method with using same values
+        var m3 = new Matrix().createBox(2, 3, rad(45), 0, 0);
+        // a matrix made through the createBox method using values returned from DisplayObject.attr()
+        var m4 = new Matrix().createBox(attrs.scaleX, attrs.scaleY, attrs.rotation, attrs.x, attrs.y);
+
+        // these seems very unpredicatble
+        expect( d.attr('matrix') ).toEqual( m ); // -> fail
+        expect( d._attributes._matrix ).toEqual( m ); // -> fail
+        expect( d.attr('matrix') ).toEqual( m2 ); // -> fail
+        expect( d._attributes._matrix ).toEqual( m2 ); // -> fail
+        expect( d.attr('matrix') ).toEqual( m3 ); // -> pass
+        expect( d._attributes._matrix ).toEqual( m3 ); // -> fail
+        expect( d.attr('matrix') ).toEqual( m4 ); // -> pass
+        expect( d._attributes._matrix ).toEqual( m4 ); // -> fail
+      });
     });
 
     describe('interactive', function() {
